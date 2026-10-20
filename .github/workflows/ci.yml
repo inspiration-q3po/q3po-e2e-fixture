@@ -1,0 +1,16 @@
+name: ci
+on:
+  pull_request:
+    branches: ['rc/**']
+    types: [opened, synchronize, reopened, edited]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: grep -q '<h1>' site/index.html
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node test.js
